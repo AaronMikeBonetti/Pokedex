@@ -1,0 +1,18 @@
+@if (pokemon) {
+<div class="pokemon-info">
+  <h2>{{ pokemon.name | titlecase }}</h2>
+  <div class="info">
+    <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+    <p><strong>Height:</strong> {{ pokemon.height }}</p>
+    <p><strong>Weight:</strong> {{ pokemon.weight }}</p>
+    <p><strong>Abilities:</strong></p>
+    @for (abilities of pokemon.abilities; track pokemon.abilities; let count =
+    $count ) {
+    <li *ngFor="let ability of pokemon.abilities">
+      {{ ability.ability.name | titlecase }}
+    </li>
+    }
+  </div>
+</div>
+}
+<app-spinner *ngIf="isLoading"></app-spinner>

@@ -1,0 +1,31 @@
+@if (!isLoading) {
+<div class="pokemon-info">
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Search Pokémon" />
+  <button class="search-button" (click)="searchPokemon()">Search</button>
+  <ul>
+    @for (pokemon of filteredPokemon; track pokemon) {
+    <a routerLink="api/pokemon/{{ pokemon.name }}">
+      <li>{{ pokemon.name | titlecase }}</li>
+    </a>
+    }
+  </ul>
+  <div class="pagination">
+    <button
+      class="pagination-button"
+      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+    >
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="pagination-button"
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+    >
+      Next
+    </button>
+  </div>
+</div>
+}
+<app-spinner *ngIf="isLoading"></app-spinner>
